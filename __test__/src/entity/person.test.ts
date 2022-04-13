@@ -18,7 +18,7 @@ describe("Person", () => {
     expect(person).toBeInstanceOf(Person);
     expect(person.id).toStrictEqual(dataForTesting.id);
     expect(person.name).toStrictEqual(dataForTesting.name);
-    expect(person.birthDate).toStrictEqual(dataForTesting.birthdate);
+    expect(person.birthdate).toStrictEqual(dataForTesting.birthdate);
   });
 
   it("Should catch an empty.", () => {

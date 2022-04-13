@@ -49,8 +49,12 @@ describe("PersonController", () => {
 
     const person = await controller.getById(people[0].id);
 
-    expect(person.id).toBeTruthy();
-    expect(person.name).toBeTruthy();
-    expect(person.birthdate).toBeTruthy();
+    expect(person.isSuccess(person.result)).toBe(true);
+
+    if (person.isSuccess(person.result)) {
+      expect(person.result.id).toBeTruthy();
+      expect(person.result.name).toBeTruthy();
+      expect(person.result).toBeTruthy();
+    }
   });
 });

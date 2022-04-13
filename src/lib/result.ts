@@ -3,12 +3,12 @@ import Exception from "../error/exception";
 class Result<T> {
   constructor(public readonly result: T | Exception) {}
 
-  getException(): Exception | null {
-    return (this.result instanceof Exception && this.result) || null;
+  isException(value: T | Exception): value is Exception {
+    return this.result instanceof Exception;
   }
 
-  getValue(): T | null {
-    return (!(this.result instanceof Exception) && this.result) || null;
+  isSuccess(value: T | Exception): value is T {
+    return !(this.result instanceof Exception);
   }
 }
 

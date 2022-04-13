@@ -18,13 +18,13 @@ class Person {
   }
 
   validateBirthdateInformed() {
-    if (!this.birthDate) {
+    if (!this.birthdate) {
       throw new BusinessException("You must to inform the birthdate");
     }
   }
 
   validateBirthdateInPast() {
-    if (this.birthDate > new Date(Date.now())) {
+    if (this.birthdate > new Date(Date.now())) {
       throw new BusinessException("The birthdate must to be in past");
     }
   }
@@ -38,7 +38,7 @@ class Person {
 
   constructor(
     public readonly name: string,
-    public readonly birthDate: Date,
+    public readonly birthdate: Date,
     public readonly id: string = crypto.randomUUID()
   ) {
     this.validate();

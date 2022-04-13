@@ -1,3 +1,4 @@
+import Result from "../lib/result";
 import Person from "../entity/person";
 import AddPersonUseCase from "../use-case/add-person";
 import FetchAllPeople from "../use-case/fetch-all-people";
@@ -30,26 +31,30 @@ class PersonController {
     return {
       id: createdPerson.id,
       name: createdPerson.name,
-      birthdate: createdPerson.birthDate,
+      birthdate: new Date(createdPerson.birthdate),
     };
+  }
+
+  public async getById(id: string): Promise<Result<PersonDataType>> {
+    const result = await this.getByIdUseCase.execute(id);
+
+    if (result.isException(result.result)) {
+      return new Result<PersonDataType>(result.result);
+    } else {
+      return new Result<PersonDataType>({
+        id: result.result.id,
+        name: result.result.name,
+        birthdate: result.result.birthdate,
+      });
+    }
   }
 
   public async fetchAll(): Promise<PersonDataType[]> {
     return (await this.fetchAllUseCase.execute()).map((p) => ({
       id: p.id,
       name: p.name,
-      birthdate: p.birthDate,
+      birthdate: p.birthdate,
     }));
-  }
-
-  public async getById(id: string): Promise<PersonDataType> {
-    const createdPerson = await this.getByIdUseCase.execute(id);
-
-    return {
-      id: createdPerson.id,
-      name: createdPerson.name,
-      birthdate: createdPerson.birthDate,
-    };
   }
 }
 
