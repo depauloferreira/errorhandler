@@ -47,7 +47,7 @@ class PersonRepositoryPostgres implements PersonRepository {
         new InfrastructureException(error.message, error)
       );
 
-      // console.log(res.result);
+      console.log(res.result);
 
       return res;
     }

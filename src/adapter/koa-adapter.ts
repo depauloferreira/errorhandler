@@ -11,9 +11,9 @@ class KoaAdapter {
         const { name, birthdate } = ctx.request.body;
         const controller = new PersonController();
 
-        const people = await controller.create(name, new Date(birthdate));
+        const person = await controller.create(name, new Date(birthdate));
         ctx.status = StatusCodes.OK;
-        ctx.body = people;
+        ctx.body = person;
       } catch (error: any) {
         ctx.status = StatusCodes.INTERNAL_SERVER_ERROR;
         ctx.body = error.toString();
@@ -33,7 +33,7 @@ class KoaAdapter {
         ctx.status = code;
         ctx.body = body;
       } else {
-        ctx.status = StatusCodes.INTERNAL_SERVER_ERROR;
+        ctx.status = StatusCodes.OK;
         ctx.body = result.result;
       }
     };

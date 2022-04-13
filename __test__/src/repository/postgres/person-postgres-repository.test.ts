@@ -1,4 +1,5 @@
 import * as crypto from "crypto";
+import Result from "../../../../src/lib/result";
 import Person from "../../../../src/entity/person";
 import PersonRepositoryPostgres from "../../../../src/repository/postgres/person-postgres-repository";
 
@@ -36,13 +37,13 @@ describe("PersonRepositoryPostgres", () => {
     }
   });
 
-  it("should save a new Person", async () => {
+  it("should get an specifc person", async () => {
     const repo = new PersonRepositoryPostgres();
     const people = await repo.getAll();
 
     expect(people.length).toBeGreaterThan(0);
     const person = await repo.getById(people[0].id);
 
-    expect(person).toMatchObject<Person>(people[0]);
+    expect(person).toMatchObject<Result<Person>>(new Result<Person>(people[0]));
   });
 });
