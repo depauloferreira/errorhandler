@@ -1,14 +1,14 @@
 import Exception from "../error/exception";
 
 class Result<T> {
-  constructor(public readonly result: T | Exception) {}
+  constructor(public readonly result: T | Error) {}
 
-  isException(value: T | Exception): value is Exception {
-    return this.result instanceof Exception;
+  isException(value: T | Error): value is Exception {
+    return value instanceof Error;
   }
 
-  isSuccess(value: T | Exception): value is T {
-    return !(this.result instanceof Exception);
+  isSuccess(value: T | Error): value is T {
+    return !(value instanceof Error);
   }
 }
 
